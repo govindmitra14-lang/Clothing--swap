@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FashionSwap - Clothing Swap Platform | Earn Credits</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #10b981;
+            --secondary: #f3f4f6;
+            --accent: #ffffff;
+        }
+        .gradient-bg { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-8px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+        .fade-in { animation: fadeIn 0.8s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .credit-balance { background: linear-gradient(135deg, var(--primary), #059669); }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased min-h-screen">
+    
+    <!-- NAVBAR -->
+    <nav class="bg-white shadow-2xl sticky top-0 z-50 backdrop-blur-xl border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="#home" class="text-3xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                    Fashion<span class="text-emerald-600">Swap</span>
+                </a>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-emerald-600 font-medium transition-all duration-300">Home</a>
+                    <a href="#browse" class="text-gray-700 hover:text-emerald-600 font-medium transition-all duration-300">Browse</a>
+                    <a href="#upload" class="text-gray-700 hover:text-emerald-600 font-medium transition-all duration-300">Upload Item</a>
+                    <a href="#credits" class="text-gray-700 hover:text-emerald-600 font-medium transition-all duration-300">Credits</a>
+                    <a href="#messages" class="text-gray-700 hover:text-emerald-600 font-medium transition-all duration-300">Messages</a>
+                </div>
+
+                <!-- Auth & Credits -->
+                <div class="flex items-center space-x-4">
+                    <div id="creditDisplay" class="hidden credit-balance text-white px-4 py-2 rounded-2xl font-bold text-sm shadow-lg">
+                        <i class="fas fa-coins mr-2"></i>
+                        <span id="creditBalance">150</span> Credits
+                    </div>
+                    <button id="loginBtn" class="bg-emerald-600 text-white px-6 py-2 rounded-2xl font-semibold hover:bg-emerald-700 shadow-lg transition-all duration-300">
+                        Login
+                    </button>
+                    <button id="profileBtn" class="hidden bg-gray-800 text-white px-6 py-2 rounded-2xl font-semibold hover:bg-gray-900 shadow-lg transition-all duration-300">
+                        <i class="fas fa-user-circle mr-2"></i>Profile
+                    </button>
+                </div>
+
+                <!-- Mobile Menu -->
+                <button id="mobileMenuBtn" class="md:hidden p-2">
+                    <i class="fas fa-bars text-2xl text-gray-700"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="md:hidden hidden bg-white border-t shadow-lg">
+            <div class="px-4 py-6 space-y-4">
+                <a href="#home" class="block py-3 px-4 rounded-xl hover:bg-emerald-50">Home</a>
+                <a href="#browse" class="block py-3 px-4 rounded-xl hover:bg-emerald-50">Browse Items</a>
+                <a href="#upload" class="block py-3 px-4 rounded-xl hover:bg-emerald-50">Upload Item</a>
+                <a href="#credits" class="block py-3 px-4 rounded-xl hover:bg-emerald-50">My Credits</a>
+                <a href="#messages" class="block py-3 px-4 rounded-xl hover:bg-emerald-50">Messages</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="gradient-bg text-white py-32 relative overflow-hidden">
+        <div class="absolute inset-0 bg-black/30"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 class="text-5xl md:text-7xl font-bold mb-8 fade-in">
+                Swap Your <span class="block text-emerald-300 mt-4">Fashion</span>
+            </h1>
+            <p class="text-2xl md:text-3xl mb-12 opacity-90 fade-in max-w-3xl mx-auto leading-relaxed">
+                Exchange clothes you love. Earn credits. Sustainable fashion starts here.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center fade-in">
+                <a href="#browse" class="bg-white text-emerald-600 px-12 py-6 rounded-3xl font-bold text-xl hover:shadow-2xl hover:scale-105 transition-all duration-500 shadow-xl">
+                    <i class="fas fa-search mr-3"></i>Browse Items
+                </a>
+                <a href="#upload" class="border-4 border-white text-white px-12 py-6 rounded-3xl font-bold text-xl hover:bg-white hover:text-emerald-600 transition-all duration-500">
+                    <i class="fas fa-upload mr-3"></i>Upload Item
+                </a>
+            </div>
+            <div class="mt-16 grid md:grid-cols-3 gap-8 max-w-4xl mx-auto opacity-90 fade-in">
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-white/20 rounded-3xl mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">10K+</h3>
+                    <p>Active Swappers</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-white/20 rounded-3xl mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-exchange-alt text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">50K+</h3>
+                    <p>Items Swapped</p>
+                </div>
+                <div class="text-center p-6">
+                    <div class="w-20 h-20 bg-white/20 rounded-3xl mx-auto mb-4 flex items-center justify-center">
+                        <i class="fas fa-leaf text-2xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">100%</h3>
+                    <p>Eco-Friendly</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BROWSE ITEMS -->
+    <section id="browse" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20 fade-in">
+                <h2 class="text-5xl font-bold text-gray-900 mb-6">Available Items</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Browse latest clothing items ready for swap</p>
+            </div>
+            
+            <!-- Filters -->
+            <div class="flex flex-wrap gap-4 mb-12 justify-center items-center fade-in">
+                <select id="categoryFilter" class="px-6 py-3 border-2 border-gray-200 rounded-2xl focus:border-emerald-600 focus:outline-none text-lg">
+                    <option>All Categories</option>
+                    <option>T-Shirts</option>
+                    <option>Jeans</option>
+                    <option>Dresses</option>
+                    <option>Jackets</option>
+                </select>
+                <select id="sizeFilter" class="px-6 py-3 border-2 border-gray-200 rounded-2xl focus:border-emerald-600 focus:outline-none text-lg">
+                    <option>All Sizes</option>
+                    <option>XS</option>
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
+                <input type="number" id="creditFilter" placeholder="Max Credits" class="px-6 py-3 border-2 border-gray-200 rounded-2xl focus:border-emerald-600 focus:outline-none text-lg w-32">
+            </div>
+
+            <!-- Items Grid -->
+            <div id="itemsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Sample Items -->
+                <div class="bg-white rounded-3xl shadow-xl p-8 card-hover border fade-in" data-category="T-Shirts" data-size="M" data-credits="25">
+                    <div class="w-full h-64 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-2xl mb-6 flex items-center justify-center">
+                        <i class="fas fa-tshirt text-6xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Nike T-Shirt</h3>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <span><i class="fas fa-ruler-combined mr-1"></i>M</span>
+                        <span class="ml-4"><i class="fas fa-star mr-1"></i>Like New</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-3xl font-bold text-emerald-600">25 Credits</span>
+                        <span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-sm font-semibold">Nike</span>
+                    </div>
+                    <button class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all duration-300 message-btn" data-user="john_doe">
+                        <i class="fas fa-message mr-2"></i>Message Owner
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-8 card-hover border fade-in" data-category="Jeans" data-size="L" data-credits="45">
+                    <div class="w-full h-64 bg-gradient-to-br from-purple-400 to-pink-500 rounded-2xl mb-6 flex items-center justify-center">
+                        <i class="fas fa-jeans text-6xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Levi's 511 Jeans</h3>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <span><i class="fas fa-ruler-combined mr-1"></i>L</span>
+                        <span class="ml-4"><i class="fas fa-star mr-1"></i>Good</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-3xl font-bold text-emerald-600">45 Credits</span>
+                        <span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm font-semibold">Levi's</span>
+                    </div>
+                    <button class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all duration-300 message-btn" data-user="sarah_wilson">
+                        <i class="fas fa-message mr-2"></i>Message Owner
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-8 card-hover border fade-in" data-category="Dresses" data-size="S" data-credits="60">
+                    <div class="w-full h-64 bg-gradient-to-br from-pink-400 to-rose-500 rounded-2xl mb-6 flex items-center justify-center">
+                        <i class="fas fa-gem text-6xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Summer Dress</h3>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <span><i class="fas fa-ruler-combined mr-1"></i>S</span>
+                        <span class="ml-4"><i class="fas fa-star mr-1"></i>New</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-3xl font-bold text-emerald-600">60 Credits</span>
+                        <span class="px-3 py-1 bg-pink-100 text-pink-800 rounded-full text-sm font-semibold">Zara</span>
+                    </div>
+                    <button class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 text-white py-4 rounded-2xl font-bold text-lg hover:shadow-2xl transition-all duration-300 message-btn" data-user="emma_clark">
+                        <i class="fas fa-message mr-2"></i>Message Owner
+                    </button>
+                </div>
+
+                <div class="bg-white rounded-3xl shadow-xl p-8 card-hover border fade-in" data-category="Jackets" data-size="XL" data-credits="80">
+                    <div class="w-full h-64 bg-gradient-to-br from-gray-400 to-gray-600 rounded-2xl mb-6 flex items-center justify-center">
+                        <i class="fas fa-coat-hanger text-6xl text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Denim Jacket</h3>
+                    <div class="flex items-center text-sm text-gray-500 mb-4">
+                        <span><i class="fas fa-ruler-combined mr-1"></i>XL</span>
+                        <span class="ml-4"><i class="fas fa-star mr-1"></i>Like New</span>
+                    </div>
+                    <div class="flex justify-between items-center mb-6">
+                        <span class="text-3xl font-bold text-emerald-600">80 Credits</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-800 rounded-full text-sm font-semibold">H&M</span>
+                    </div>
+                    <button class="w-full bg-gradient-to-r from-emerald-600 to-teal-600
